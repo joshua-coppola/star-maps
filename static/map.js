@@ -80,12 +80,9 @@
     LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
     OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
     PERFORMANCE OF THIS SOFTWARE.
-    ***************************************************************************** */ function n (
-    t,
-    e,
-    n,
-    i
-  ) {
+    ***************************************************************************** */
+
+  function n (t, e, n, i) {
     return new (n || (n = Promise))(function (r, s) {
       function a (t) {
         try {
@@ -17472,8 +17469,9 @@
     return (
       (r !== s && a !== o) ||
       !(0 !== r || !ao(t, n, e)) ||
-        !(0 !== s || !ao(t, i, e)) ||
-          !(0 !== a || !ao(n, t, i)) || !(0 !== o || !ao(n, e, i))
+      !(0 !== s || !ao(t, i, e)) ||
+      !(0 !== a || !ao(n, t, i)) ||
+      !(0 !== o || !ao(n, e, i))
     )
   }
   function ao (t, e, n) {

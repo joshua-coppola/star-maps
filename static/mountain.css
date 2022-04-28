@@ -10,7 +10,7 @@ main {
 .result > * {
   margin-bottom: 16px;
 }
-.result a {
+.map-link {
   font-size: 20px;
   position: absolute;
   bottom: 0;
@@ -31,9 +31,9 @@ main {
   font-size: 18px;
 }
 
-.links {
-  display: flex;
-  align-items: center;
+.thumbnail {
+  float: left;
+  width: 20%;
 }
 
 .search-form {

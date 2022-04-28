@@ -129,15 +129,16 @@ def search():
 
     mountains_data = []
     for mountain in mountains:
+        name = mountain['name']
         mountains_data.append({
-            'name': mountain['name'],
+            'name': name,
             'beginner_friendliness': mountain['beginner_friendliness'],
             'difficulty': mountain['difficulty'],
             'state': state_code_to_state(mountain['state']),
             'trail_count': mountain['trail_count'],
             'vertical': mountain['vertical'],
-            'map_link': url_for('map', mountainid=mountain['mountainid'])
-        })
+            'map_link': url_for('map', mountainid=mountain['mountainid']),
+            'thumbnail': f'thumbnails/{name}.svg'})
 
     conn.close()
 
@@ -156,7 +157,7 @@ def search():
     return render_template("mountains.jinja", nav_links=navlinks, active_page="search", mountains=mountains_data, pages=pages)
 
 
-@app.route("/rankings")
+@ app.route("/rankings")
 def rankings():
     sort = request.args.get('sort')
     if not sort:
@@ -196,7 +197,7 @@ def rankings():
     return render_template("rankings.jinja", nav_links=navlinks, active_page="rankings", mountains=mountainsFormatted, sort=sort, order=order)
 
 
-@app.route("/map/<int:mountainid>")
+@ app.route("/map/<int:mountainid>")
 def map(mountainid):
     conn = getdbconnection()
 
@@ -223,7 +224,7 @@ def map(mountainid):
     return render_template("map.jinja", nav_links=navlinks, active_page="map", mountain=mountain)
 
 
-@app.route("/data/<int:mountainid>/objects", methods=['GET'])
+@ app.route("/data/<int:mountainid>/objects", methods=['GET'])
 def mountaindata(mountainid):
     conn = getdbconnection()
     trailrows = conn.execute(
@@ -263,7 +264,7 @@ def mountaindata(mountainid):
     return jsonstring
 
 
-@app.route("/data/<int:mountainid>/map.svg", methods=['GET'])
+@ app.route("/data/<int:mountainid>/map.svg", methods=['GET'])
 def svgmaps(mountainid):
     conn = getdbconnection()
     mountainname = conn.execute(
@@ -282,7 +283,7 @@ def svgmaps(mountainid):
         return fileReturn.read(), 200, {'Content-Type': 'image/svg+xml'}
 
 
-@app.route("/data/<int:mountainid>/paths", methods=['GET'])
+@ app.route("/data/<int:mountainid>/paths", methods=['GET'])
 def pathdata(mountainid):
     conn = getdbconnection()
     trails = conn.execute(

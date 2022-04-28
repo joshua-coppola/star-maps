@@ -34,11 +34,14 @@ Search
   <ul class="results">
     {% for mountain in mountains %}
     <li class="result">
+      <a href="{{mountain.map_link}}">
+        <img class="thumbnail" src="{{mountain.thumbnail}}" width = 125px height = 75px/>
+      </a>
       <h2>{{mountain.name}}</h2>
       <p class="copy">
         {{mountain.state}} — {{mountain.trail_count}} Trails — {{mountain.vertical}}m Vertical
       </p>
-      <a href="{{mountain.map_link}}">View map</a>
+      <a class="map-link" href="{{mountain.map_link}}">View map</a>
     </li>
     {% endfor %}
   </ul>
