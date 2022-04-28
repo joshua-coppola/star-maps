@@ -1,0 +1,57 @@
+{% extends "page_base.jinja" %}
+
+{% block title %}
+Rankings
+{% endblock title %}
+
+{% block pagehead %}
+<link href="/rankings.css" rel="stylesheet" />
+{% endblock pagehead %}
+
+{% block content %}
+<section id="content">
+  <h1>Mountain Rankings</h1>
+
+  <ul class="ranking-sort">
+    {% if sort == "beginner" %}
+      {% if order == "desc" %}
+        <li><a href="/rankings?sort=beginner&order=asc" class="active">Beginner Friendliness &#x25bc;</a></li>
+      {% endif %}
+      {% if order == "asc" %}
+        <li><a href="/rankings?sort=beginner&order=desc" class="active">Beginner Friendliness &#x25b2;</a></li>
+      {% endif %}
+
+      <li><a href="/rankings?sort=difficulty&order=desc">Difficulty</a></li>
+    {% endif %}
+
+    {% if sort == "difficulty" %}
+      <li><a href="/rankings?sort=beginner&order=desc">Beginner Friendliness</a></li>
+
+      {% if order == "desc" %}
+        <li><a href="/rankings?sort=difficulty&order=asc" class="active">Difficulty &#x25bc;</a></li>
+      {% endif %}
+      {% if order == "asc" %}
+        <li><a href="/rankings?sort=difficulty&order=desc" class="active">Difficulty &#x25b2;</a></li>
+      {% endif %}
+    {% endif %}
+  </ul>
+
+  <p class="detail">
+    {% if sort == "beginner" %}
+      The Beginner Friendliness ranking is a weighted average of the easiest trails at each resort. It shows how easy it would be to learn to ski on these trails.
+    {% endif %}
+    {% if sort == "difficulty "%}
+      The Difficulty ranking is a weighted average of the hardest trails at each resort. It shows how much of a challenge the mountain will present to advanced skiers.
+    {% endif %}
+  </p>
+
+  <div class="rankings">
+    {% for mountain in mountains %}
+      <a href="{{mountain.map_link}}">{{mountain.name}}</a>
+      <span class="ranking-bar" style="--bar-size: {{
+        mountain.beginner_friendliness if sort == 'beginner' else mountain.difficulty
+      }}%; --bar-color: {{ 'green' if sort == 'beginner' else 'green' if mountain.difficulty < 17 else 'royalblue' if mountain.difficulty < 24 else 'black' if mountain.difficulty < 30 else 'red' if mountain.difficulty < 45 else 'gold' }};"></span>
+    {% endfor %}
+  </div>
+</section>
+{% endblock content %}

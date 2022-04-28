@@ -1,0 +1,6 @@
+*.db
+__pycache__
+*.sqbpro
+*.project
+*.dbeaver
+venv/
