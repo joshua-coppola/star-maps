@@ -93,11 +93,14 @@
 .form-difficulty.intermediate {
   fill: royalblue;
 }
-.form-difficulty.expert {
+.form-difficulty.advanced {
   fill: #222;
 }
-.form-difficulty.hardest {
+.form-difficulty.expert {
   fill: red;
+}
+.form-difficulty.extreme {
+  fill: gold;
 }
 *[disabled] .form-difficulty {
   filter: grayscale();

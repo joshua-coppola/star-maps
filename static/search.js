@@ -438,17 +438,18 @@
       return (
         (e.prototype.attach = function (e) {
           ;(this.svg = t(
-            '<svg width="100%" height="32" role="presentation" xmlns="http://www.w3.org/2000/svg">\n        <rect x="0" y="0" width="25%" height="16" class="form-difficulty beginner"></rect>\n        <rect x="25%" y="0" width="25%" height="16" class="form-difficulty intermediate"></rect>\n        <rect x="50%" y="0" width="25%" height="16" class="form-difficulty expert"></rect>\n        <rect x="75%" y="0" width="25%" height="16" class="form-difficulty hardest"></rect>\n      </svg>'
+            '<svg width="100%" height="32" role="presentation" xmlns="http://www.w3.org/2000/svg">\n        <rect x="0" y="0" width="20%" height="16" class="form-difficulty beginner"></rect>\n        <rect x="20%" y="0" width="20%" height="16" class="form-difficulty intermediate"></rect>\n        <rect x="40%" y="0" width="20%" height="16" class="form-difficulty advanced"></rect>\n        <rect x="60%" y="0" width="20%" height="16" class="form-difficulty expert"></rect>\n      <rect x="80%" y="0" width="20%" height="16" class="form-difficulty extreme"></rect>\n      </svg>'
           )),
             (this.difficultyBgs = [
               this.svg.children[0],
               this.svg.children[1],
               this.svg.children[2],
-              this.svg.children[3]
+              this.svg.children[3],
+              this.svg.children[4]
             ]),
-            this.difficultyBgs[3].classList.add('inactive'),
+            this.difficultyBgs[4].classList.add('inactive'),
             (this.thumbLeft = new n(this.svg, '0%')),
-            (this.thumbRight = new n(this.svg, '75%')),
+            (this.thumbRight = new n(this.svg, '80%')),
             e.appendChild(this.svg)
           var i = t('<span class="form-slider"></span>')
           i.appendChild(this.svg),
@@ -457,7 +458,7 @@
                 .concat(this.id, '-l" name="')
                 .concat(
                   this.id,
-                  '-l" min="0" max="4" value="0" step="1" style="opacity: 0; position: fixed; left: -100%;" />'
+                  '-l" min="0" max="5" value="0" step="1" style="opacity: 0; position: fixed; left: -100%;" />'
                 )
             )),
             (this.sliderRight = t(
@@ -465,7 +466,7 @@
                 .concat(this.id, '-r" name="')
                 .concat(
                   this.id,
-                  '-r" min="0" max="4" value="3" step="1" style="opacity: 0; position: fixed; left: -100%;" />'
+                  '-r" min="0" max="5" value="4" step="1" style="opacity: 0; position: fixed; left: -100%;" />'
                 )
             )),
             e.appendChild(i),
@@ -518,7 +519,7 @@
         }),
         (e.prototype.computeFloatingSliderValue = function (t) {
           var e = this.svg.getBoundingClientRect()
-          return ((t.clientX - e.left) / e.width) * 4
+          return ((t.clientX - e.left) / e.width) * 5
         }),
         (e.prototype.onMouseDown = function (t) {
           this.mouseDown = !0
@@ -543,8 +544,8 @@
           }
         }),
         (e.prototype.updateSlider = function () {
-          this.thumbLeft.setValue(25 * this.sliderLeft.valueAsNumber + '%'),
-            this.thumbRight.setValue(25 * this.sliderRight.valueAsNumber + '%')
+          this.thumbLeft.setValue(20 * this.sliderLeft.valueAsNumber + '%'),
+            this.thumbRight.setValue(20 * this.sliderRight.valueAsNumber + '%')
           for (
             var t = this.sliderLeft.valueAsNumber,
               e = this.sliderRight.valueAsNumber,
@@ -582,19 +583,31 @@
   function d (t) {
     switch (t) {
       case 0:
-        return 17
+        return 0
       case 1:
-        return 24
+        return 17
       case 2:
-        return 30
+        return 24
       case 3:
-        return 45
+        return 30
       case 4:
+        return 45
+      case 5:
         return 100
     }
   }
   function c (t) {
-    return t <= 17 ? 0 : t <= 24 ? 1 : t <= 30 ? 2 : t <= 45 ? 3 : 4
+    return t == 0
+      ? 0
+      : t <= 17
+      ? 1
+      : t <= 24
+      ? 2
+      : t <= 30
+      ? 3
+      : t <= 45
+      ? 4
+      : 5
   }
   function f () {
     var t,
