@@ -40,7 +40,7 @@ Rankings
     {% if sort == "beginner" %}
       The Beginner Friendliness ranking is a weighted average of the easiest trails at each resort. It shows how easy it would be to learn to ski on these trails.
     {% endif %}
-    {% if sort == "difficulty "%}
+    {% if sort == "difficulty"%}
       The Difficulty ranking is a weighted average of the hardest trails at each resort. It shows how much of a challenge the mountain will present to advanced skiers.
     {% endif %}
   </p>
@@ -48,9 +48,14 @@ Rankings
   <div class="rankings">
     {% for mountain in mountains %}
       <a href="{{mountain.map_link}}">{{mountain.name}}</a>
+      {% if sort == "difficulty" %}
       <span class="ranking-bar" style="--bar-size: {{
-        mountain.beginner_friendliness if sort == 'beginner' else mountain.difficulty
-      }}%; --bar-color: {{ 'green' if sort == 'beginner' else 'green' if mountain.difficulty < 17 else 'royalblue' if mountain.difficulty < 24 else 'black' if mountain.difficulty < 30 else 'red' if mountain.difficulty < 45 else 'gold' }};"></span>
+        (mountain.difficulty)/55 * 60}}%; --bar-color: {{ 'green' if mountain.difficulty < 17 else 'royalblue' if mountain.difficulty < 24 else 'black' if mountain.difficulty < 30 else 'red' if mountain.difficulty < 45 else 'gold' }};"></span>
+      {% endif %}
+      {% if sort == "beginner" %}
+      <span class="ranking-bar" style="--bar-size: {{
+        (mountain.beginner_friendliness)/30 * 60}}%; --bar-color: {{ 'green' if mountain.beginner_friendliness > 13 else 'royalblue' if mountain.beginner_friendliness > 6 else 'black' if mountain.beginner_friendliness > 0 else 'red' if mountain.beginner_friendliness > -15 else 'gold' }};"></span>
+      {% endif %}
     {% endfor %}
   </div>
 </section>

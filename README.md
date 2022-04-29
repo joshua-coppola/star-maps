@@ -21,43 +21,58 @@ python3 wsgi.py
 
 ## Todo
 
-As things currently stand, most pages exist and work, but small tweaks need to be made. This README will be updated as features are completed and bugs are fixed.
+As things currently stand, most pages exist and work, but small tweaks need to be made. This README will be updated as features are completed and bugs are fixed. Every line item is denoted with a priority: high, medium, or low.
 
 ### Index Page
 
-- [ ] Improve appearance -- it is a rather plain landing page
+- [ ] Medium - improve appearance -- it is a rather plain landing page
+- [ ] Low - improve mobile support
 
 ### About Page
 
-- [ ] Improve appearance -- I don't love the blue stripe and in general could be better with some tweaks
-- [x] Fix word choice in a couple spots
+- [ ] Medium - improve appearance -- I don't love the blue stripe and in general could be better with some tweaks
+- [x] High - fix word choice in a couple spots
+- [ ] Low - improve mobile support
 
 ### Search Page
 
-- [x] fix off by one color error with difficulty slider
-- [x] fix missing yellow section on difficulty slider
-- [x] fix being able to move the left and right sliders past each other on the difficulty slider
-- [x] add thumbnails to results
-- [x] make thumbnails and mountain names clickable
-- [x] implement sorting drop-down logic
-- [x] add alphabetized sorts to drop down
-- [x] add vertical sort to drop down
-- [x] add trail count sort to drop down
-- [ ] add slider to filter by vertical
-- [ ] reorder filters
-- [ ] add difficulty to each mountain in results
-- [ ] improve filter by state to take abbreviations or full state names
-- [ ] UI/UX improvements
+- [x] High - fix off by one color error with difficulty slider
+- [x] High - fix missing yellow section on difficulty slider
+- [x] High - fix being able to move the left and right sliders past each other on the difficulty slider
+- [x] High - add thumbnails to results
+- [x] Medium - make thumbnails and mountain names clickable
+- [x] High - implement sorting drop-down logic
+- [x] Medium - add alphabetized sorts to drop down
+- [x] Medium - add vertical sort to drop down
+- [x] Medium - add trail count sort to drop down
+- [ ] Medium - add slider to filter by vertical
+- [ ] Medium - reorder filters
+- [ ] Medium - add difficulty to each mountain in results
+- [ ] Medium - improve filter by state to take abbreviations or full state names
+- [ ] Low - improve default behavior for sliders
+- [ ] Medium - fix search box not resetting correctly
+- [ ] Low - UI/UX improvements
+- [ ] Low - improve mobile support
+
+### Map Pages
+
+- [ ] High - fix sidebar covering map by default
+- [ ] Medium - optimize / remove 3D maps
+- [ ] Low - improve mobile support
 
 ### Rankings
 
-- [ ] fix how bar length for beginner friendliness is displayed
-- [ ] difficulty blurb does not display
-- [ ] add grid-lines to give sense of scale
-- [ ] add ranking numbers
-- [ ] implement filters similar to search page
-- [ ] UI/UX improvements
+- [x] High - fix how bar length for beginner friendliness is displayed
+- [x] High - fix bar colors for beginner friendliness
+- [x] High - difficulty blurb does not display
+- [x] Medium - improve bar scaling
+- [ ] Medium - add grid-lines to give sense of scale
+- [ ] Medium - add ranking numbers
+- [ ] Medium - implement filters similar to search page
+- [ ] Medium - add legend to top of page
+- [ ] Low - UI/UX improvements
+- [ ] Low - improve mobile support
 
 ### Trail Rankings
 
-- [ ] implement a trail rankings page similar to the mountain rankings
+- [ ] Low - implement a trail rankings page similar to the mountain rankings
