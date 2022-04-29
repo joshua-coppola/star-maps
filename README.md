@@ -25,35 +25,39 @@ As things currently stand, most pages exist and work, but small tweaks need to b
 
 ### Index Page
 
-- [] Improve appearance -- it is a rather plain landing page
+- [ ] Improve appearance -- it is a rather plain landing page
 
 ### About Page
 
-- [] Improve appearance -- I don't love the blue stripe and in general could be better with some tweaks
+- [ ] Improve appearance -- I don't love the blue stripe and in general could be better with some tweaks
 - [x] Fix word choice in a couple spots
 
 ### Search Page
 
-- [x] fix off by 1 error with difficulty slider
+- [x] fix off by one color error with difficulty slider
 - [x] fix missing yellow section on difficulty slider
 - [x] fix being able to move the left and right sliders past each other on the difficulty slider
 - [x] add thumbnails to results
 - [x] make thumbnails and mountain names clickable
-- [] implement sorting drop-down logic
-- [] add alphabetized sorts to drop down
-- [] add slider to filter by vertical
-- [] improve filter by state to take abbreviations or full state names
-- [] UI/UX improvements
+- [x] implement sorting drop-down logic
+- [x] add alphabetized sorts to drop down
+- [x] add vertical sort to drop down
+- [x] add trail count sort to drop down
+- [ ] add slider to filter by vertical
+- [ ] reorder filters
+- [ ] add difficulty to each mountain in results
+- [ ] improve filter by state to take abbreviations or full state names
+- [ ] UI/UX improvements
 
 ### Rankings
 
-- [] fix how bar length for beginner friendliness is displayed
-- [] difficulty blurb does not display
-- [] add gridlines to give sense of scale
-- [] add ranking numbers
-- [] implement filters similar to search page
-- [] UI/UX improvements
+- [ ] fix how bar length for beginner friendliness is displayed
+- [ ] difficulty blurb does not display
+- [ ] add grid-lines to give sense of scale
+- [ ] add ranking numbers
+- [ ] implement filters similar to search page
+- [ ] UI/UX improvements
 
 ### Trail Rankings
 
-- [] implement a trail rankings page similar to the mountain rankings
+- [ ] implement a trail rankings page similar to the mountain rankings

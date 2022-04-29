@@ -115,6 +115,16 @@ def search():
         trailsmax = 1000
     else:
         searchstring += "trailsmax=" + str(trailsmax) + "&"
+    sort = request.args.get('sort')
+    if not sort:
+        sort = 'name'
+    else:
+        searchstring += "sort=" + sort + "&"
+    order = request.args.get('order')
+    if not order:
+        order = 'asc'
+    else:
+        searchstring += "order=" + order + "&"
 
     queryParams = removesuffix(searchstring, '&')
     page = int(page)
@@ -122,7 +132,7 @@ def search():
     bottomlimit = limit*(page-1)
 
     conn = getdbconnection()
-    mountains = conn.execute('SELECT * FROM Mountains WHERE name LIKE ? AND state LIKE ? AND trail_count >= ? AND trail_count <= ? AND difficulty >= ? AND difficulty <= ? LIMIT ? OFFSET ?',
+    mountains = conn.execute(f'SELECT * FROM Mountains WHERE name LIKE ? AND state LIKE ? AND trail_count >= ? AND trail_count <= ? AND difficulty >= ? AND difficulty <= ? ORDER BY {sort} {order} LIMIT ? OFFSET ?',
                              (q, location, trailsmin, trailsmax, diffmin, diffmax, limit, bottomlimit)).fetchall()
     elements = len(conn.execute('SELECT * FROM Mountains WHERE name LIKE ? AND state LIKE ? AND trail_count >= ? AND trail_count <= ? AND difficulty >= ? AND difficulty <= ?',
                    (q, location, trailsmin, trailsmax, diffmin, diffmax)).fetchall())
