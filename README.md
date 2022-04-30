@@ -65,14 +65,22 @@ As things currently stand, most pages exist and work, but small tweaks need to b
 - [x] High - fix how bar length for beginner friendliness is displayed
 - [x] High - fix bar colors for beginner friendliness
 - [x] High - difficulty blurb does not display
+- [x] High - add better descriptions to difficulty and beginner friendliness
 - [x] Medium - improve bar scaling
+- [x] Medium - improve bar spacing
 - [ ] Medium - add grid-lines to give sense of scale
-- [ ] Medium - add ranking numbers
+- [x] Medium - add hover over text for difficulty numbers
+- [x] Medium - add ranking numbers and state for each mountain
 - [ ] Medium - implement filters similar to search page
 - [ ] Medium - add legend to top of page
+- [ ] Medium - make bars clickable
 - [ ] Low - UI/UX improvements
 - [ ] Low - improve mobile support
 
 ### Trail Rankings
 
 - [ ] Low - implement a trail rankings page similar to the mountain rankings
+
+### Database
+
+- [ ] Medium - don't store state in name for duplicate mountain names
