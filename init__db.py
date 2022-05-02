@@ -2,6 +2,33 @@ import sqlite3
 import csv
 import os
 
+
+def format_name(name: str) -> str:
+    """
+    Converts a string to have all major words capitalized
+
+    #### Arguments:
+
+    - name - string
+
+    #### Returns:
+
+    - name - formatted name
+    """
+    name_list = name.split('_')
+    name = ''
+    for word in name_list:
+        if word[:3] == 'mcc':
+            word = 'McC' + word[3:]
+            name = '{}{} '.format(name, word)
+            continue
+        if len(word) > 2 or word == 'fe':
+            name = '{}{} '.format(name, word.capitalize())
+        else:
+            name = '{}{} '.format(name, word)
+    return name.strip()
+
+
 connection = sqlite3.connect('databases.db')
 
 with open('schema.sql') as f:
@@ -20,9 +47,7 @@ for filename in os.scandir(r'../Ski-Trail-Ratings/cached/trails'):
         dr = csv.DictReader(fin)
         mountainname = str(os.path.basename(filename.path))
         mountainname = mountainname.replace('.csv', '')
-        mountainname = mountainname.replace("_", " ")
-        mountainname = mountainname.title()
-        print(mountainname)
+        mountainname = format_name(mountainname)
         mountainid = str(cur.execute(
             'SELECT mountainid FROM Mountains WHERE name = ?', (mountainname,)).fetchone())
         mountainid = ''.join(x for x in mountainid if x.isdigit())
@@ -35,8 +60,7 @@ for filename in os.scandir(r'../Ski-Trail-Ratings/cached/lifts'):
         dr = csv.DictReader(fin)
         mountainname = str(os.path.basename(filename.path))
         mountainname = mountainname.replace('.csv', '')
-        mountainname = mountainname.replace("_", " ")
-        mountainname = mountainname.title()
+        mountainname = format_name(mountainname)
         mountainid = str(cur.execute(
             'SELECT mountainid FROM Mountains WHERE name = ?', (mountainname,)).fetchone())
         mountainid = ''.join(x for x in mountainid if x.isdigit())
