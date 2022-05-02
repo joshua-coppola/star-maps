@@ -56,8 +56,10 @@ As things currently stand, most pages exist and work, but small tweaks need to b
 
 ### Map Pages
 
-- [ ] High - fix sidebar covering map by default
+- [x] High - fix sidebar covering map by default
+- [x] Medium - sort trails and lifts on sidebar
 - [ ] Medium - optimize / remove 3D maps
+- [ ] Medium - make zoom zoom in on cursor, not center of map
 - [ ] Low - improve mobile support
 
 ### Rankings
@@ -71,7 +73,7 @@ As things currently stand, most pages exist and work, but small tweaks need to b
 - [ ] Medium - add grid-lines to give sense of scale
 - [x] Medium - add hover over text for difficulty numbers
 - [x] Medium - add ranking numbers and state for each mountain
-- [ ] Medium - implement filters similar to search page
+- [x] Medium - implement filters similar to search page
 - [ ] Medium - add legend to top of page
 - [ ] Medium - make bars clickable
 - [ ] Low - UI/UX improvements
@@ -84,3 +86,4 @@ As things currently stand, most pages exist and work, but small tweaks need to b
 ### Database
 
 - [ ] Medium - don't store state in name for duplicate mountain names
+- [ ] High - when initializing the trail data, use my reformatting function for mountain names so it doesn't break on edge case
