@@ -11,9 +11,9 @@ cur = connection.cursor()
 
 with open('../Ski-Trail-Ratings/mountain_list.csv', 'r') as fin:
     dr = csv.DictReader(fin)
-    todb = [(i['mountain'], i['file_name'], i['direction'], i['state'], i['difficulty'],
+    todb = [(i['mountain'], i['file_name'], i['direction'], i['state'], i['region'], i['difficulty'],
              30 - float(i['ease']), i['vert'], i['trail_count'], i['lift_count']) for i in dr]
-cur.executemany("INSERT INTO Mountains (name, osm_file_name, direction, state, difficulty, beginner_friendliness, vertical, trail_count, lift_count) VALUES (? , ?, ?, ?, ?, ?, ?, ?, ?);", todb)
+cur.executemany("INSERT INTO Mountains (name, osm_file_name, direction, state, region, difficulty, beginner_friendliness, vertical, trail_count, lift_count) VALUES (? , ?, ?, ?, ?, ?, ?, ?, ?, ?);", todb)
 
 for filename in os.scandir(r'../Ski-Trail-Ratings/cached/trails'):
     with open(filename.path, 'r') as fin:

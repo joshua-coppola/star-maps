@@ -6,6 +6,7 @@ CREATE TABLE "Mountains" (
 	"osm_file_name" TEXT NOT NULL,
 	"name" TEXT NOT NULL,
 	"state" TEXT NOT NULL,
+  "region" TEXT NOT NULL,
 	"direction" TEXT NOT NULL,
 	"trail_count" INTEGER NOT NULL,
 	"lift_count" INTEGER NOT NULL,

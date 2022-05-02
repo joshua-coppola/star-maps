@@ -175,23 +175,22 @@ def rankings():
     order = request.args.get('order')
     if not order:
         order = "desc"
+    region = request.args.get('region')
+    if not region:
+        region = "usa"
     # converts query string info into SQL
     conn = getdbconnection()
     mountainsFormatted = []
     if sort == "beginner":
-        if order == "asc":
-            mountains = conn.execute(
-                'SELECT * FROM Mountains ORDER BY beginner_friendliness ASC').fetchall()
-        else:
-            mountains = conn.execute(
-                'SELECT * FROM Mountains ORDER BY beginner_friendliness DESC').fetchall()
+        sort_by = "beginner_friendliness"
     else:
-        if order == "asc":
-            mountains = conn.execute(
-                'SELECT * FROM Mountains ORDER BY difficulty ASC').fetchall()
-        else:
-            mountains = conn.execute(
-                'SELECT * FROM Mountains ORDER BY difficulty DESC').fetchall()
+        sort_by = "difficulty"
+    if region == "usa":
+        mountains = conn.execute(
+            f'SELECT * FROM Mountains ORDER BY {sort_by} {order}').fetchall()
+    else:
+        mountains = conn.execute(
+            f'SELECT * FROM Mountains WHERE region = ? ORDER BY {sort_by} {order}', (region,)).fetchall()
 
     for mountain in mountains:
         mountainentry = {
@@ -204,7 +203,7 @@ def rankings():
         mountainsFormatted.append(mountainentry)
 
     conn.close()
-    return render_template("rankings.jinja", nav_links=navlinks, active_page="rankings", mountains=mountainsFormatted, sort=sort, order=order)
+    return render_template("rankings.jinja", nav_links=navlinks, active_page="rankings", mountains=mountainsFormatted, sort=sort, order=order, region=region)
 
 
 @ app.route("/map/<int:mountainid>")
@@ -223,9 +222,9 @@ def map(mountainid):
     }
 
     trails = conn.execute(
-        'SELECT name, difficulty FROM Trails WHERE mountainid = ?', (mountainid,)).fetchall()
+        'SELECT name, difficulty FROM Trails WHERE mountainid = ? ORDER BY difficulty DESC', (mountainid,)).fetchall()
     lifts = conn.execute(
-        'SELECT name FROM Lifts WHERE mountainid = ?', (mountainid,)).fetchall()
+        'SELECT name FROM Lifts WHERE mountainid = ? ORDER BY name ASC', (mountainid,)).fetchall()
     conn.close()
 
     mountain = mountainToMapPage(
