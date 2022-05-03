@@ -86,4 +86,4 @@ As things currently stand, most pages exist and work, but small tweaks need to b
 ### Database
 
 - [ ] Medium - don't store state in name for duplicate mountain names
-- [ ] High - when initializing the trail data, use my reformatting function for mountain names so it doesn't break on edge case
+- [x] High - when initializing the trail data, use my reformatting function for mountain names so it doesn't break on edge case

@@ -41,9 +41,26 @@ Search
     {% for mountain in mountains %}
     <li class="result">
       <a href="{{mountain.map_link}}">
-        <img class="thumbnail" src="{{mountain.thumbnail}}" width = 125px height = 75px/>
+        <img class="thumbnail" src="{{mountain.thumbnail}}" width = 125px height = 100px/>
       </a>
       <h2><a href="{{mountain.map_link}}" style="color: black">{{mountain.name}}</a></h2>
+      {% if mountain.difficulty < 17 %}
+        <p class="copy"><span class="icon difficulty-green"></span>Difficulty — {{mountain.difficulty}}</p>
+      {% else %}
+      {% if mountain.difficulty < 24 %}
+        <p class="copy"><span class="icon difficulty-blue"></span>Difficulty — {{mountain.difficulty}}</p>
+      {% else %}
+      {% if mountain.difficulty < 30 %}
+        <p class="copy"><span class="icon difficulty-black"></span>Difficulty — {{mountain.difficulty}}</p>
+      {% else %}
+      {% if mountain.difficulty < 45 %}
+        <p class="copy"><span class="icon difficulty-red"></span>Difficulty — {{mountain.difficulty}}</p>
+      {% else %}
+        <p class="copy"><span class="icon difficulty-yellow"></span>Difficulty — {{mountain.difficulty}}</p>
+      {% endif %}
+      {% endif %}
+      {% endif %}
+      {% endif %}
       <p class="copy">
         {{mountain.state}} — {{mountain.trail_count}} Trails — {{mountain.vertical}}m Vertical
       </p>

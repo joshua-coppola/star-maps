@@ -22,7 +22,8 @@ class navlink:
 navlinks = []
 navlinks.append(navlink("About", "about", "/about"))
 navlinks.append(navlink("Search", "search", "/search"))
-navlinks.append(navlink("Rankings", "rankings", "/rankings"))
+navlinks.append(navlink("Rankings", "rankings",
+                "/rankings?sort=difficulty&order=desc&region=usa"))
 
 # Load the state abbreviation data
 with open('states.csv', 'r') as fd:
