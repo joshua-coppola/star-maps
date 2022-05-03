@@ -47,7 +47,8 @@ As things currently stand, most pages exist and work, but small tweaks need to b
 - [x] Medium - add trail count sort to drop down
 - [ ] Medium - add slider to filter by vertical
 - [ ] Medium - reorder filters
-- [ ] Medium - add difficulty to each mountain in results
+- [x] Medium - add difficulty to each mountain in results
+- [x] Medium - make double diamond icons for red and yellow difficulties
 - [ ] Medium - improve filter by state to take abbreviations or full state names
 - [ ] Low - improve default behavior for sliders
 - [ ] Medium - fix search box not resetting correctly
@@ -75,7 +76,6 @@ As things currently stand, most pages exist and work, but small tweaks need to b
 - [x] Medium - add ranking numbers and state for each mountain
 - [x] Medium - implement filters similar to search page
 - [ ] Medium - add legend to top of page
-- [ ] Medium - make bars clickable
 - [ ] Low - UI/UX improvements
 - [ ] Low - improve mobile support
 
