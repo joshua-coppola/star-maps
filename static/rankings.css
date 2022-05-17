@@ -15,6 +15,14 @@
   color: var(--color-accent);
 }
 
+.legend ul li {
+  white-space: nowrap;
+  display: inline;
+  margin-top: 8px;
+  margin-right: 30px;
+  color: var(--color-secondary);
+}
+
 .rankings {
   display: grid;
   grid-template-columns: max-content 1fr;
@@ -37,7 +45,6 @@
   font-size: 14px;
   color:white
 }
-
 .rankings .black-text {
   width: var(--bar-size);
   background-color: var(--bar-color);
