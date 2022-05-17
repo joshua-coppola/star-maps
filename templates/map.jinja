@@ -26,7 +26,7 @@
       </ul>
     </div>
     <div class="mountain-section">
-      <h2>Trails</h2>
+      <h2>Trails - Sorted by Difficulty</h2>
       <ul>
         {% for trail in mountain.trails %}
           {% if not '_' in trail.name %}
@@ -34,7 +34,7 @@
             {% if trail.difficulty < 17 %}
             <span class="icon difficulty-green"></span>
             {% else %}
-            {% if trail.difficulty < 24 %}
+            {% if trail.difficulty < 24.2 %}
             <span class="icon difficulty-blue"></span>
             {% else %}
             {% if trail.difficulty < 30 %}
@@ -48,7 +48,7 @@
             {% endif %}
             {% endif %}
             {% endif %}
-            {{trail.name}}
+            {{trail.steepest_pitch}}° {{trail.name}}
           </li>
           {% endif %}
         {% endfor %}

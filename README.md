@@ -32,6 +32,8 @@ As things currently stand, most pages exist and work, but small tweaks need to b
 
 - [ ] Medium - improve appearance -- I don't love the blue stripe and in general could be better with some tweaks
 - [x] High - fix word choice in a couple spots
+- [ ] Medium - add Q & A section
+- [ ] Medium - add developer information section
 - [ ] Low - improve mobile support
 
 ### Search Page
@@ -52,6 +54,7 @@ As things currently stand, most pages exist and work, but small tweaks need to b
 - [ ] Medium - improve filter by state to take abbreviations or full state names
 - [ ] Low - improve default behavior for sliders
 - [ ] Medium - fix search box not resetting correctly
+- [x] Medium - convert to feet
 - [ ] Low - UI/UX improvements
 - [ ] Low - improve mobile support
 
@@ -62,6 +65,8 @@ As things currently stand, most pages exist and work, but small tweaks need to b
 - [ ] Medium - optimize / remove 3D maps
 - [ ] Medium - make zoom zoom in on cursor, not center of map
 - [ ] Low - improve mobile support
+- [x] Medium - make trail list use difficulty modifiers
+- [x] Medium - add steepness to trails in trail list
 
 ### Rankings
 

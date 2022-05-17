@@ -39,7 +39,7 @@ cur = connection.cursor()
 with open('../Ski-Trail-Ratings/mountain_list.csv', 'r') as fin:
     dr = csv.DictReader(fin)
     todb = [(i['mountain'], i['file_name'], i['direction'], i['state'], i['region'], i['difficulty'],
-             30 - float(i['ease']), i['vert'], i['trail_count'], i['lift_count']) for i in dr]
+             30 - float(i['ease']), int(float(i['vert']) * 100 / (2.54 * 12)), i['trail_count'], i['lift_count']) for i in dr]
 cur.executemany("INSERT INTO Mountains (name, osm_file_name, direction, state, region, difficulty, beginner_friendliness, vertical, trail_count, lift_count) VALUES (? , ?, ?, ?, ?, ?, ?, ?, ?, ?);", todb)
 
 for filename in os.scandir(r'../Ski-Trail-Ratings/cached/trails'):
@@ -51,7 +51,7 @@ for filename in os.scandir(r'../Ski-Trail-Ratings/cached/trails'):
         mountainid = str(cur.execute(
             'SELECT mountainid FROM Mountains WHERE name = ?', (mountainname,)).fetchone())
         mountainid = ''.join(x for x in mountainid if x.isdigit())
-        todb = [(i['name'], i['is_area'], i['difficulty'], i['difficulty_modifier'],
+        todb = [(i['name'], i['is_area'], (float(i['steepest_pitch']) + (float(i['difficulty_modifier']) * 7)), i['difficulty_modifier'],
                  i['steepest_pitch'], i['vert'], i['length'], i['id'], mountainid) for i in dr]
     cur.executemany("INSERT INTO Trails (name, is_area, difficulty, difficulty_modifier, steepest_pitch, vertical_drop, length, trailid, mountainid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", todb)
 

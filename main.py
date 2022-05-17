@@ -219,11 +219,11 @@ def map(mountainid):
     statistics = {
         "Trail Count": mountain_row['trail_count'],
         "Lift Count": mountain_row['lift_count'],
-        "Vertical": str(mountain_row['vertical']) + 'm'
+        "Vertical": str(mountain_row['vertical']) + "'"
     }
 
     trails = conn.execute(
-        'SELECT name, difficulty FROM Trails WHERE mountainid = ? ORDER BY difficulty DESC', (mountainid,)).fetchall()
+        'SELECT name, difficulty, steepest_pitch FROM Trails WHERE mountainid = ? ORDER BY difficulty DESC', (mountainid,)).fetchall()
     lifts = conn.execute(
         'SELECT name FROM Lifts WHERE mountainid = ? ORDER BY name ASC', (mountainid,)).fetchall()
     conn.close()
