@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS Mountains;
 
 CREATE TABLE "Mountains" (
-	"mountainid" INTEGER NOT NULL,
+	"mountain_id" INTEGER NOT NULL,
 	"osm_file_name" TEXT NOT NULL,
 	"name" TEXT NOT NULL,
 	"state" TEXT NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE "Mountains" (
 	"vertical" INTEGER NOT NULL,
 	"difficulty" REAL NOT NULL,
 	"beginner_friendliness" REAL NOT NULL,
-	PRIMARY KEY("mountainid" AUTOINCREMENT)
+	PRIMARY KEY("mountain_id" AUTOINCREMENT)
 );
 
 
@@ -21,8 +21,8 @@ DROP TABLE IF EXISTS Trails;
 
 CREATE TABLE "Trails"
 (
-  "trailid" INTEGER NOT NULL,
-  "mountainid" INTEGER NOT NULL,
+  "trail_id" INTEGER NOT NULL,
+  "mountain_id" INTEGER NOT NULL,
   "name" TEXT NOT NULL,
   "is_area" INTEGER NOT NULL,
   "difficulty" REAL NOT NULL,
@@ -30,21 +30,21 @@ CREATE TABLE "Trails"
   "steepest_pitch" REAL NOT NULL,
   "vertical_drop" REAL NOT NULL,
   "length" REAL NOT NULL,
-  PRIMARY KEY("trailid"),
-  FOREIGN KEY("mountainid") REFERENCES "Mountains"("mountainid") ON DELETE CASCADE
+  PRIMARY KEY("trail_id"),
+  FOREIGN KEY("mountain_id") REFERENCES "Mountains"("mountain_id") ON DELETE CASCADE
 );
 
 
 DROP TABLE IF EXISTS Lifts;
 
 CREATE TABLE "Lifts" (
-	"liftid" INTEGER NOT NULL,
-	"mountainid" INTEGER NOT NULL,
+	"lift_id" INTEGER NOT NULL,
+	"mountain_id" INTEGER NOT NULL,
 	"name" TEXT NOT NULL,
-	PRIMARY KEY("liftid" AUTOINCREMENT),
+	PRIMARY KEY("lift_id" AUTOINCREMENT),
 	FOREIGN KEY
-("mountainid") REFERENCES "Mountains"
-("mountainid") ON
+("mountain_id") REFERENCES "Mountains"
+("mountain_id") ON
 DELETE CASCADE
 );
 
@@ -54,14 +54,14 @@ DROP TABLE IF EXISTS TrailPoints;
 CREATE TABLE "TrailPoints"
 (
   "ind" INTEGER NOT NULL,
-  "trailid" INTEGER NOT NULL,
+  "trail_id" INTEGER NOT NULL,
   "for_display" INTEGER NOT NULL,
   "latitude" REAL NOT NULL,
   "longitude" REAL NOT NULL,
   "elevation" REAL NOT NULL,
   "slope" REAL NOT NULL,
-  PRIMARY KEY("ind","trailid", "for_display"),
-  FOREIGN KEY("trailid") REFERENCES "Trails"("trailid") ON DELETE CASCADE
+  PRIMARY KEY("ind","trail_id", "for_display"),
+  FOREIGN KEY("trail_id") REFERENCES "Trails"("trail_id") ON DELETE CASCADE
 );
 
 
@@ -70,12 +70,12 @@ DROP TABLE IF EXISTS LiftPoints;
 CREATE TABLE "LiftPoints"
 (
   "ind" INTEGER NOT NULL,
-  "liftid" INTEGER NOT NULL,
+  "lift_id" INTEGER NOT NULL,
   "latitude" REAL NOT NULL,
   "longitude" REAL NOT NULL,
   "elevation" REAL NOT NULL,
-  PRIMARY KEY("ind","liftid"),
-  FOREIGN KEY("liftid") REFERENCES "Lifts"("liftid") ON DELETE CASCADE
+  PRIMARY KEY("ind","lift_id"),
+  FOREIGN KEY("lift_id") REFERENCES "Lifts"("lift_id") ON DELETE CASCADE
 );
 
 

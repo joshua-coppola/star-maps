@@ -148,7 +148,7 @@ def search():
             'state': state_code_to_state(mountain['state']),
             'trail_count': mountain['trail_count'],
             'vertical': mountain['vertical'],
-            'map_link': url_for('map', mountainid=mountain['mountainid']),
+            'map_link': url_for('map', mountain_id=mountain['mountain_id']),
             'thumbnail': f'thumbnails/{name}.svg'})
 
     conn.close()
@@ -199,7 +199,7 @@ def rankings():
             "beginner_friendliness": mountain['beginner_friendliness'],
             "difficulty": mountain['difficulty'],
             "state": mountain['state'],
-            "map_link": url_for('map', mountainid=mountain['mountainid'])
+            "map_link": url_for('map', mountain_id=mountain['mountain_id'])
         }
         mountainsFormatted.append(mountainentry)
 
@@ -207,12 +207,12 @@ def rankings():
     return render_template("rankings.jinja", nav_links=navlinks, active_page="rankings", mountains=mountainsFormatted, sort=sort, order=order, region=region)
 
 
-@ app.route("/map/<int:mountainid>")
-def map(mountainid):
+@ app.route("/map/<int:mountain_id>")
+def map(mountain_id):
     conn = getdbconnection()
 
     mountain_row = conn.execute(
-        'SELECT name, state, trail_count, lift_count, vertical FROM Mountains WHERE mountainid = ?', (mountainid,)).fetchone()
+        'SELECT name, state, trail_count, lift_count, vertical FROM Mountains WHERE mountain_id = ?', (mountain_id,)).fetchone()
     if not mountain_row:
         return "404"
 
@@ -223,24 +223,24 @@ def map(mountainid):
     }
 
     trails = conn.execute(
-        'SELECT name, difficulty, steepest_pitch FROM Trails WHERE mountainid = ? ORDER BY difficulty DESC', (mountainid,)).fetchall()
+        'SELECT name, difficulty, steepest_pitch FROM Trails WHERE mountain_id = ? ORDER BY difficulty DESC', (mountain_id,)).fetchall()
     lifts = conn.execute(
-        'SELECT name FROM Lifts WHERE mountainid = ? ORDER BY name ASC', (mountainid,)).fetchall()
+        'SELECT name FROM Lifts WHERE mountain_id = ? ORDER BY name ASC', (mountain_id,)).fetchall()
     conn.close()
 
     mountain = mountainToMapPage(
-        mountainid, mountain_row['name'], mountain_row['state'], statistics, trails, lifts)
+        mountain_id, mountain_row['name'], mountain_row['state'], statistics, trails, lifts)
 
     return render_template("map.jinja", nav_links=navlinks, active_page="map", mountain=mountain)
 
 
-@ app.route("/data/<int:mountainid>/objects", methods=['GET'])
-def mountaindata(mountainid):
+@ app.route("/data/<int:mountain_id>/objects", methods=['GET'])
+def mountaindata(mountain_id):
     conn = getdbconnection()
     trailrows = conn.execute(
-        'SELECT * FROM Trails WHERE mountainid = ?', (mountainid,)).fetchall()
+        'SELECT * FROM Trails WHERE mountain_id = ?', (mountain_id,)).fetchall()
     liftrows = conn.execute(
-        'SELECT liftid, name FROM Lifts WHERE mountainid = ?', (mountainid,)).fetchall()
+        'SELECT lift_id, name FROM Lifts WHERE mountain_id = ?', (mountain_id,)).fetchall()
     conn.close()
 
     if not trailrows:
@@ -252,7 +252,7 @@ def mountaindata(mountainid):
 
     for trail in trailrows:
         trailentry = {
-            "id": trail['trailid'],
+            "id": trail['trail_id'],
             "name": trail['name'],
             "difficulty": trail['difficulty'],
             "length": trail['length'],
@@ -263,7 +263,7 @@ def mountaindata(mountainid):
 
     for lift in liftrows:
         liftentry = {
-            "id": lift['liftid'],
+            "id": lift['lift_id'],
             "name": lift['name'],
         }
         lifts.append(liftentry)
@@ -274,11 +274,11 @@ def mountaindata(mountainid):
     return jsonstring
 
 
-@ app.route("/data/<int:mountainid>/map.svg", methods=['GET'])
-def svgmaps(mountainid):
+@ app.route("/data/<int:mountain_id>/map.svg", methods=['GET'])
+def svgmaps(mountain_id):
     conn = getdbconnection()
     mountainname = conn.execute(
-        'SELECT name FROM Mountains WHERE mountainid = ?', (mountainid,)).fetchone()
+        'SELECT name FROM Mountains WHERE mountain_id = ?', (mountain_id,)).fetchone()
     conn.close()
 
     if not mountainname:
@@ -293,44 +293,44 @@ def svgmaps(mountainid):
         return fileReturn.read(), 200, {'Content-Type': 'image/svg+xml'}
 
 
-@ app.route("/data/<int:mountainid>/paths", methods=['GET'])
-def pathdata(mountainid):
+@ app.route("/data/<int:mountain_id>/paths", methods=['GET'])
+def pathdata(mountain_id):
     conn = getdbconnection()
     trails = conn.execute(
-        'SELECT * FROM Trails WHERE mountainid = ?', (mountainid,)).fetchall()
+        'SELECT * FROM Trails WHERE mountain_id = ?', (mountain_id,)).fetchall()
     lifts = conn.execute(
-        'SELECT * FROM Lifts WHERE mountainid = ?', (mountainid,)).fetchall()
+        'SELECT * FROM Lifts WHERE mountain_id = ?', (mountain_id,)).fetchall()
     if not trails:
         conn.close()
         return "404"
     alltrails = []
     for trail in trails:
-        trailid = trail['trailid']
+        trail_id = trail['trail_id']
         tpcontents = conn.execute(
-            "SELECT latitude, longitude, elevation FROM TrailPoints WHERE trailid = ?", (trailid,))
+            "SELECT latitude, longitude, elevation FROM TrailPoints WHERE trail_id = ?", (trail_id,))
         trailstring = ""
         for tp in tpcontents:
             trailstring += str(round(tp['latitude'], 5)) + "," + str(
                 round(tp['longitude'], 5)) + "," + str(round(tp['elevation'], 1)) + "|"
         finaltrailstring = removesuffix(trailstring, "|")
         trailInput = {
-            "id": trailid,
+            "id": trail_id,
             "points": finaltrailstring
         }
         alltrails.append(trailInput)
 
     allifts = []
     for lift in lifts:
-        liftid = lift['liftid']
+        lift_id = lift['lift_id']
         lpcontents = conn.execute(
-            "SELECT latitude, longitude, elevation FROM LiftPoints WHERE liftid = ?", (liftid,))
+            "SELECT latitude, longitude, elevation FROM LiftPoints WHERE lift_id = ?", (lift_id,))
         liftstring = ""
         for lp in lpcontents:
             liftstring += str(round(lp['latitude'], 5)) + "," + str(
                 round(lp['longitude'], 5)) + "," + str(round(lp['elevation'], 1)) + "|"
         finalliftstring = removesuffix(liftstring, "|")
         liftInput = {
-            "id": liftid,
+            "id": lift_id,
             "points": finalliftstring
         }
         allifts.append(liftInput)

@@ -67,6 +67,7 @@ As things currently stand, most pages exist and work, but small tweaks need to b
 - [ ] Low - improve mobile support
 - [x] Medium - make trail list use difficulty modifiers
 - [x] Medium - add steepness to trails in trail list
+- [ ] High - Figure out what is going on with the weird characters in trail names (See Afton Alps & others)
 
 ### Rankings
 
@@ -80,7 +81,7 @@ As things currently stand, most pages exist and work, but small tweaks need to b
 - [x] Medium - add hover over text for difficulty numbers
 - [x] Medium - add ranking numbers and state for each mountain
 - [x] Medium - implement filters similar to search page
-- [ ] Medium - add legend to top of page
+- [x] Medium - add legend to top of page
 - [ ] Low - UI/UX improvements
 - [ ] Low - improve mobile support
 
